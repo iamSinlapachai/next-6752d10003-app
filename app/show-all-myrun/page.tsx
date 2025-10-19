@@ -13,7 +13,7 @@ type MyRuns = {
   run_date: string;
   run_distance: number;
   run_place: string;
-  run_image_url: string;
+  run_image_url: string | null;
 };
 
 export default function Page() {
@@ -44,7 +44,7 @@ export default function Page() {
   const handleDeleteClick = async (id: string) => {
     // ก่อนลบให้ถามยืนยันผู้ใช้
     if (confirm("แน่ใจว่าจะลบงานนี้หรือไม่")) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("myrun_tb")
         .delete()
         .eq("id", id);
@@ -55,7 +55,7 @@ export default function Page() {
         return;
       }
 
-      setMyruns(myruns.filter((myrun) => myrun.id !== id));
+      setMyruns((previous) => previous.filter((myrun) => myrun.id !== id));
       alert("ลบข้อมูลเรียบร้อยแล้ว");
     }
   };
@@ -104,6 +104,7 @@ export default function Page() {
                         alt="รูปการวิ่งของคุณ"
                         width={50}
                         height={50}
+                        unoptimized
                       />
                     ) : (
                       "-"

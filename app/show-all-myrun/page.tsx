@@ -29,7 +29,9 @@ export default function Page() {
     setLoading(true);
     const { data, error } = await supabase
       .from("myrun_tb")
-      .select("id, created_at, run_date, run_distance, run_place, run_image_url")
+      .select(
+        "id, created_at, run_date, run_distance, run_place, run_image_url"
+      )
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -87,9 +89,12 @@ export default function Page() {
               <p className="text-xs font-semibold uppercase tracking-[0.35em] text-blue-600">
                 My Runs
               </p>
-              <h1 className="mt-2 text-3xl font-bold text-slate-900">การวิ่งของฉัน</h1>
+              <h1 className="mt-2 text-3xl font-bold text-slate-900">
+                การวิ่งของฉัน
+              </h1>
               <p className="mt-2 max-w-xl text-sm text-slate-600">
-                ติดตามบันทึกการวิ่งทั้งหมดของคุณ พร้อมจัดการข้อมูลอย่างง่ายดายไม่ว่าจะอยู่ที่หน้าจอขนาดใด
+                ติดตามบันทึกการวิ่งทั้งหมดของคุณ
+                พร้อมจัดการข้อมูลอย่างง่ายดายไม่ว่าจะอยู่ที่หน้าจอขนาดใด
               </p>
             </div>
           </div>
@@ -97,7 +102,11 @@ export default function Page() {
           <Link
             href="/create-my-run"
             className={cn(
-              buttonVariants({ variant: "primary", fullWidth: false, size: "md" }),
+              buttonVariants({
+                variant: "primary",
+                fullWidth: false,
+                size: "md",
+              }),
               "self-center sm:self-start"
             )}
           >
@@ -115,7 +124,11 @@ export default function Page() {
               <p>ยังไม่มีข้อมูลการวิ่ง</p>
               <Link
                 href="/create-my-run"
-                className={buttonVariants({ variant: "primary", fullWidth: false, size: "sm" })}
+                className={buttonVariants({
+                  variant: "primary",
+                  fullWidth: false,
+                  size: "sm",
+                })}
               >
                 เพิ่มข้อมูลครั้งแรก
               </Link>
@@ -170,15 +183,19 @@ export default function Page() {
                               <span className="text-slate-400">-</span>
                             )}
                           </td>
-                          <td className="px-4 py-3 font-medium">{run.run_distance}</td>
+                          <td className="px-4 py-3 font-medium">
+                            {run.run_distance}
+                          </td>
                           <td className="px-4 py-3">{run.run_place}</td>
                           <td className="px-4 py-3 text-right">
                             <div className="flex items-center justify-end gap-3">
                               <Link
                                 href={`/edit-my-run/${run.id}`}
-                                className={
-                                  buttonVariants({ variant: "link", fullWidth: false, size: "sm" })
-                                }
+                                className={buttonVariants({
+                                  variant: "link",
+                                  fullWidth: false,
+                                  size: "sm",
+                                })}
                               >
                                 แก้ไข
                               </Link>
@@ -186,7 +203,12 @@ export default function Page() {
                                 type="button"
                                 onClick={() => handleDeleteClick(run.id)}
                                 className={
-                                  buttonVariants({ variant: "danger", fullWidth: false, size: "sm" })
+                                  // Add 'cursor-pointer' to the generated classes
+                                  `${buttonVariants({
+                                    variant: "danger",
+                                    fullWidth: false,
+                                    size: "sm",
+                                  })} cursor-pointer`
                                 }
                                 disabled={deletingId === run.id}
                               >
@@ -246,26 +268,34 @@ export default function Page() {
                         </dd>
                       </div>
                       <div>
-                        <dt className="font-medium text-slate-500">วันที่วิ่ง</dt>
-                        <dd className="mt-1 text-sm text-slate-900">{run.run_date}</dd>
+                        <dt className="font-medium text-slate-500">
+                          วันที่วิ่ง
+                        </dt>
+                        <dd className="mt-1 text-sm text-slate-900">
+                          {run.run_date}
+                        </dd>
                       </div>
                     </dl>
 
                     <div className="mt-6 flex flex-wrap items-center gap-3">
                       <Link
                         href={`/edit-my-run/${run.id}`}
-                        className={
-                          buttonVariants({ variant: "link", fullWidth: false, size: "sm" })
-                        }
+                        className={buttonVariants({
+                          variant: "link",
+                          fullWidth: false,
+                          size: "sm",
+                        })}
                       >
                         แก้ไข
                       </Link>
                       <button
                         type="button"
                         onClick={() => handleDeleteClick(run.id)}
-                        className={
-                          buttonVariants({ variant: "danger", fullWidth: false, size: "sm" })
-                        }
+                        className={buttonVariants({
+                          variant: "danger",
+                          fullWidth: false,
+                          size: "sm",
+                        })}
                         disabled={deletingId === run.id}
                       >
                         {deletingId === run.id ? "กำลังลบ..." : "ลบ"}
